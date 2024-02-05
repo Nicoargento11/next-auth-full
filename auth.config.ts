@@ -10,8 +10,14 @@ import google from "next-auth/providers/google";
 
 export default {
   providers: [
-    github,
-    google,
+    github({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
+    google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     credentials({
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);
