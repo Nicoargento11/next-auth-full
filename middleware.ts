@@ -7,8 +7,6 @@ import {
   apiAuthPrefix,
   authRoutes,
 } from "@/route";
-import { url } from "inspector";
-import next from "next";
 const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
@@ -29,7 +27,6 @@ export default auth((req) => {
     }
     return null;
   }
-
   if (!isLoggedIn && !isPublicRoute) {
     return Response.redirect(new URL("/auth/login", nextUrl));
   }
