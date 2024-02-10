@@ -5,6 +5,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
 import { getUserById } from "@/data/user";
 import { UserRole } from "@prisma/client";
+import { use } from "react";
 
 export const {
   handlers: { GET, POST },
@@ -27,6 +28,8 @@ export const {
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider !== "credentials") return true;
+
+      if (!user.id) return false;
 
       const existingUser = await getUserById(user.id);
 

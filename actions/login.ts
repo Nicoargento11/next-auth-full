@@ -36,6 +36,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
     return { succes: "Confirmation email sent" };
   }
+
   try {
     await signIn("credentials", {
       email,
