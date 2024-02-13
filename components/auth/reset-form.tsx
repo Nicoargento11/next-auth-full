@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ResetSchema } from "@/schemas";
+import { reset } from "@/actions/reset";
 
 import {
   Form,
@@ -17,9 +18,8 @@ import {
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FormError } from "../form-error";
-import { FormSucces } from "../form-succes";
-import { login } from "@/actions/login";
+import { FormError } from "@/components/form-error";
+import { FormSucces } from "@/components/form-succes";
 
 export const ResetForm = () => {
   const [errror, setError] = useState<string | undefined>("");
@@ -38,12 +38,12 @@ export const ResetForm = () => {
     setError("");
     setSucces("");
 
-    // startTransition(() => {
-    //   login(values).then((data) => {
-    //     setError(data?.error);
-    //     setSucces(data?.succes);
-    //   });
-    // });
+    startTransition(() => {
+      reset(values).then((data) => {
+        setError(data?.error);
+        setSucces(data?.succes);
+      });
+    });
   };
 
   return (
